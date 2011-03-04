@@ -1,10 +1,10 @@
-<h1 style="color: #09c; text-shadow: 0.05em 0.05em 0.2em gray">Sign up</h1>
+<h1 style="color: #09c; text-shadow: 0.05em 0.05em 0.2em gray">Edit Information</h1>
 
 <%= form_for(@user) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+     <%= f.label :name %>
+	 <p style="color: black"><%= @user.name%></p>
   </div>
   <div class="field">
     <%= f.label :email %><br />
@@ -19,6 +19,11 @@
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Update" %>
   </div>
 <% end %>
+
+<div>
+	<%= gravatar_for @user %>
+	<a href="http://gravatar.com/emails">change</a>
+</div>

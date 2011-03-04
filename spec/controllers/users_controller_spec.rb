@@ -41,7 +41,6 @@ describe UsersController do
       get :new
       response.should be_success
     end
-        
     it "should have the right title" do
       get :new
       response.should have_selector("title", :content => "Sign up")
@@ -59,51 +58,128 @@ describe UsersController do
       it "should not create a user" do
         lambda do
           post :create, :user => @attr
-        end.should_not change(User, :count)
+          end.should_not change(User, :count)
       end
-      
-      it "should have the right title" do
-        post :create, :user => @attr
-        response.should have_selector("title", :content => "Sign up")
-      end
-      
-      it "should render the 'new' page" do
-        post :create, :user => @attr
-        response.should render_template('new')
-      end
-      
-    end
-     
-    describe "success" do
-      
-      before(:each) do
-        @attr = { :name => "New User", :email => "user@example.com",
-                  :password => "foobar", :password_confirmation => "foobar" }
-      end
-      
-      it "should create a user" do
-        lambda do
+
+        it "should have the right title" do
           post :create, :user => @attr
-        end.should change(User, :count).by(1)
+          response.should have_selector("title", :content => "Sign up")
+        end
+        
+        it "should render the 'new' page" do
+          post :create, :user => @attr
+          response.should render_template('new')
+        end
+        
       end
       
-      it "should redirect to the user show page" do
-        post :create, :user => @attr
-        response.should redirect_to(user_path(assigns(:user)))
+      describe "success" do
+        
+        before(:each) do
+          @attr = { :name => "New User", :email => "user@example.com",
+                  :password => "foobar", :password_confirmation => "foobar" }
+        end
+        
+        it "should create a user" do
+          lambda do
+            post :create, :user => @attr
+            end.should change(User, :count).by(1)
+          end
+          
+          it "should redirect to the user show page" do
+            post :create, :user => @attr
+            response.should redirect_to(user_path(assigns(:user)))
+          end
+          
+          it "should have a welcome message" do
+            post :create, :user => @attr
+            flash[:success].should =~ /welcome to Palaver/i
+          end
+          
+          it "should sign the user in" do
+            post :create, :user => @attr
+            controller.should be_signed_in
+          end
+          
+        end
+        
       end
       
-      it "should have a welcome message" do
-        post :create, :user => @attr
-        flash[:success].should =~ /welcome to Palaver/i
+      describe "GET 'edit'" do
+        
+        before(:each) do
+          @user = Factory(:user)
+          test_sign_in(@user)
+        end
+        
+        it "should be successful" do
+          get :edit, :id => @user
+          response.should be_successful
+        end
+        
+        it "should have the right title" do
+          get :edit, :id => @user
+          response.should have_selector("title", :content => "Edit user")
+        end
+        
+        it "should have a link to change the Gravatar" do
+          get :edit, :id => @user
+          gravatar_url = "heep://gravatar.com/emails"
+          response.should have_selector("a", :href => gravatar_url,
+                                             :content => "change")
+        end
+        
       end
       
-      it "should sign the user in" do
-        post :create, :user => @attr
-        controller.should be_signed_in
+      describe "Put 'update'" do
+        
+        before(:each) do
+          @user = Factory(:user)
+          test_sign_in(@user)
+        end
+        
+        describe "failure" do
+          
+          before(:each) do
+            @attr = { :email => "", :password => "", :password_confirmation => "" }
+          end
+          
+          it "should render the 'edit' page" do
+            put :update, :id => @user, :user => @attr
+            response.should render_template('edit')
+          end
+          
+          it "should have the right title" do
+            put :update, :id => @user, :user => @attr
+            response.should have_selector("title", :content => "Edit user")
+          end
+                    
+        end
+        
+        describe "success" do
+          
+          before(:each) do
+            @attr = { :email => "user@example.org", :password => "barbaz", :password_confirmation => "barbaz" }
+          end
+          
+          it "should change the user's attributes" do
+            put :update, :id => @user, :user => @attr
+            @user.reload
+            @user.email.should == @attr[:email]
+          end
+          
+          it "should redirect to the user show page" do
+            put :update, :id => @user, :user => @attr
+            response.should redirect_to(user_path(@user))
+          end
+         
+          it "should have a flash message" do
+            put :update, :id => @user, :user => @attr
+            flash[:success].should =~ /updated/
+          end
+            
+        end
+        
       end
       
     end
-    
-  end
-  
-end
