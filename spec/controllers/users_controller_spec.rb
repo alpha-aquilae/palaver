@@ -105,7 +105,7 @@ describe UsersController do
         
       end
       
-      describe "GET 'edit'" do
+   describe "GET 'edit'" do
         
         before(:each) do
           @user = Factory(:user)
@@ -128,10 +128,9 @@ describe UsersController do
           response.should have_selector("a", :href => gravatar_url,
                                              :content => "change")
         end
-        
-      end
-      
-      describe "Put 'update'" do
+   end
+    
+  describe "Put 'update'" do
         
         before(:each) do
           @user = Factory(:user)
