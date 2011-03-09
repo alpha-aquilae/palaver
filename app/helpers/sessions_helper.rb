@@ -14,6 +14,10 @@ module SessionsHelper
     @current_user ||= user_from_remember_token
   end
   
+  def current_user?(user)
+      user == current_user
+  end
+  
   def current_user=(user)
     @current_user = user
   end
@@ -21,6 +25,10 @@ module SessionsHelper
   def signed_in?
     !current_user.nil?
   end
+  
+  def deny_access
+         redirect_to signin_path, :notice => "Please sign in to access this page."
+    end
   
   private
   
@@ -31,4 +39,5 @@ module SessionsHelper
     def remember_token
       cookies.signed[:remember_token] || [nil, nil]
     end
+        
 end
