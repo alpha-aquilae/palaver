@@ -17,7 +17,9 @@ SampleApp::Application.routes.draw do
   
   match '/designs', :to => 'pages#designs'
   
-  root :to => 'pages#home'
+  match '/index', :to => 'pages#home'
+  
+  root :to => 'pages#front'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
