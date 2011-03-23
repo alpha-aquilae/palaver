@@ -35,11 +35,19 @@
       }
 
     .sql {
-      color: #0066FF;
+      color: #99CCFF;
+    }
+    
+    .rclass {
+      color: #FFCC99;
     }
     
     .ele {
       color: #FFFF66;
+    }
+    
+    .return {
+      color: #99FF99;
     }
     </style>
     <script type="text/javascript">
@@ -56,16 +64,18 @@
       }
     </script>
   </head>
+  
   <body>
     <div id="page">
+    <p style="text-align: center; color: #484848">site under development</p>
       <div id="content">
           <span class="ele">
             <h2 style="text-align: left">&lt;dillon&gt;</h2>
           </span>
-          <code>Person.pray while Person.alive?<br />#=> true</code>
+          <code><span class="rclass">Person</span>.pray <span class="rclass">while</span> <span class="rclass">Person</span>.alive?<br /><span class="return">#=> true</span></code>
           <br />
           <br />
-          <code>-- Executing query:<br /><span class="sql">SELECT</span> verse <br/><span class="sql">FROM</span> thessalonians <br /><span class="sql">WHERE</span> book.id <span class="sql">=</span> 1<br /><span class="sql">AND</span> chapter.id <span class="sql">=</span> 5<br /><span class="sql">AND</span> verse.id <span class="sql">=</span> 17<span class="sql">;</span><br />-- Total query runtime: 94 ms.
+          <code><span class="return">-- Executing query:</span><br /><span class="sql">SELECT</span> verse <br/><span class="sql">FROM</span> Bible<br /><span class="sql">WHERE</span> book.id <span class="sql">=</span> 52<br /><span class="sql">AND</span> chapter.id <span class="sql">=</span> 5<br /><span class="sql">AND</span> verse.id <span class="sql">=</span> 17<span class="sql">;</span><br /><span class="return">-- Total query runtime:</span> 94 ms.
 <br />1 row retrieved.</code><br />
           
           <br />
