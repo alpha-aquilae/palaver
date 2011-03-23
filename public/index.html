@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DH</title>
+    <style type="text/css" media="screen">
+      body {
+        margin: 25px;
+        margin-bottom: 25px;
+        padding: 25px;
+        background-color: #f0f0f0;
+        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+        font-size: 13px;
+        color: #E0E0E0 ;
+      }
+
+      
+      #page {
+        background-color: #f0f0f0;
+        width: 750px;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #content {
+        float: left;
+        background-color: #484848;
+        color: #E8E8E8 ;
+        border: 3px solid #aaa;
+        padding: 25px;
+        width: 400px;
+        -moz-border-radius:    10px;
+        -webkit-border-radius: 10px;
+        border-radius:         10px;
+      }
+
+    .sql {
+      color: #0066FF;
+    }
+    
+    .ele {
+      color: #FFFF66;
+    }
+    </style>
+    <script type="text/javascript">
+      function about() {
+        info = document.getElementById('about-content');
+        if (window.XMLHttpRequest)
+          { xhr = new XMLHttpRequest(); }
+        else
+          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
+        xhr.open("GET","rails/info/properties",false);
+        xhr.send("");
+        info.innerHTML = xhr.responseText;
+        info.style.display = 'block'
+      }
+    </script>
+  </head>
+  <body>
+    <div id="page">
+      <div id="content">
+          <span class="ele">
+            <h2 style="text-align: left">&lt;dillon&gt;</h2>
+          </span>
+          <code>Person.pray while Person.alive?<br />#=> true</code>
+          <br />
+          <br />
+          <code>-- Executing query:<br /><span class="sql">SELECT</span> verse <br/><span class="sql">FROM</span> thessalonians <br /><span class="sql">WHERE</span> book.id <span class="sql">=</span> 1<br /><span class="sql">AND</span> chapter.id <span class="sql">=</span> 5<br /><span class="sql">AND</span> verse.id <span class="sql">=</span> 17<span class="sql">;</span><br />-- Total query runtime: 94 ms.
+<br />1 row retrieved.</code><br />
+          
+          <br />
+          <table border="1" rules=all frame=box>
+            <tr style="color: #B8B8B8  ">
+              <th>book_id</th>
+              <th>chapter_id</th>
+              <th>verse_id</th>
+              <th>verse</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>5</td>
+              <td>17</td>
+              <td>Pray without ceasing.</td>
+            </tr>
+          </table>
+
+          <span class="ele">
+            <h2 style="text-align: left">&lt;/dillon&gt;</h2>
+          </span>
+      </div>
+
+      <div id="footer">&nbsp;</div>
+    </div>
+  </body>
+</html>
